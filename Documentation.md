@@ -18,12 +18,13 @@ easyscrape scrape (url) (data_extract_path)
 Function: Crawl the given url and extract data to csv  
 url: The absolute url of the domain  
 data_extract_path: JSON file that contains an array of (colName, xPathString)  
+
 data_extract_path object format:
 ```json
 [
 	{
-		"colName": (column name for csv),
-		"xPathString": (xpath to the data you want to extract)
+		"colName": "column name for csv",
+		"xPathString": "xpath to the data you want to extract"
 	},
 	{
 		"colName": "Column 1",
