@@ -4,14 +4,14 @@
 easyscrape {download, run, scrape}
 ```
 
-###1) download
+##1) download
 ```
 easyscrape download (url)
 ```
 Function: Download the whole domain of the given url  
 url: The absolute url of the domain
 
-###2) scrape
+##2) scrape
 ```
 easyscrape scrape (url) (data_extract_path)
 ```
@@ -19,7 +19,7 @@ Function: Crawl the given url and extract data to csv
 url: The absolute url of the domain  
 data_extract_path: JSON file that contains an array of (colName, xPathString)  
 
-data_extract_path object format:
+###data_extract_path object format:
 ```json
 [
 	{
@@ -34,12 +34,13 @@ data_extract_path object format:
 ```
 Basically, it will crawl the url given and extract any data that match the given xpath into the csv column  
 
-###3) run
+##3) run
 ```
 easyscrape run (settings)
 ```
 Function: Run the given settings file, default settings is used if setting is not given  
-Default settings
+
+###Default settings:
 ```json
 {	
 	"save_html_to_directory": false,
