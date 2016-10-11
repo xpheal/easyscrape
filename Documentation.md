@@ -76,16 +76,19 @@ XPath to match: (data_extract_path)
 ###3. allowed_domains | Value: array of strings  
 An array of domains that the spider is allowed to crawl  
 The spider will not visit domains that are not listed in (allowed_domains)  
-Example:  
-	["www.facebook.com"]  
-	["waynedev.me"]  
-	["quotes.toscrape.com", "www.google.com", "www.facebook.com"]  
+Examples:  
+```
+["www.facebook.com"]  
+["waynedev.me"]  
+["quotes.toscrape.com", "www.google.com", "www.facebook.com"]  
+```
 
 ###4. start_urls | Value: array of strings  
 An array of absolute urls for the spider to start crawling  
 The spider will start crawling from this list of urls  
-Example:
-	["https://www.facebook.com"]  
-	["http://quotes.toscrape.com", "https://www.wikipedia.org"]  
-	["https://docs.python.org/3/library/index.html"]  
-
+Examples:
+```
+["https://www.facebook.com"]  
+["http://quotes.toscrape.com", "https://www.wikipedia.org"]  
+["https://docs.python.org/3/library/index.html"]  
+```
