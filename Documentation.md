@@ -39,6 +39,7 @@ Basically, it will crawl the url given and extract any data that match the given
 easyscrape run (settings)
 ```
 Function: Run the given settings file, default settings is used if setting is not given  
+\*Scroll to the bottom for settings file example.
 
 ###Default settings:
 ```json
@@ -59,3 +60,11 @@ Function: Run the given settings file, default settings is used if setting is no
 	"data_extract_path": null
 }
 ```
+
+###1. save_html_to_directory | Value: boolean  
+	If True, download pages into the directory, If False, do nothing.  
+	Name of directory: (html_directory_name)  
+	Pages allowed: (allow_page_regex) - (deny_page_regex)  
+	Page naming: (save_file_regex)  
+
+###2. save_data_to_csv | Value: boolean  
