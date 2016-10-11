@@ -62,9 +62,30 @@ Function: Run the given settings file, default settings is used if setting is no
 ```
 
 ###1. save_html_to_directory | Value: boolean  
-	If True, download pages into the directory, If False, do nothing.  
-	Name of directory: (html_directory_name)  
-	Pages allowed: (allow_page_regex) - (deny_page_regex)  
-	Page naming: (save_file_regex)  
+If True, download pages into the directory, If False, do nothing.  
+Name of directory: (html_directory_name)  
+Pages allowed: (allow_page_regex) - (deny_page_regex)  
+Page naming: (save_file_regex)  
 
 ###2. save_data_to_csv | Value: boolean  
+If True, extract data from pages that match the XPath and save them in CSV, If False, do nothing.  
+Name of CSV output file: (csv_output_file)  
+Pages allowed: (allow_page_regex) - (deny_page_regex)  
+XPath to match: (data_extract_path)  
+
+###3. allowed_domains | Value: array of strings  
+An array of domains that the spider is allowed to crawl  
+The spider will not visit domains that are not listed in (allowed_domains)  
+Example:  
+	["www.facebook.com"]  
+	["waynedev.me"]  
+	["quotes.toscrape.com", "www.google.com", "www.facebook.com"]  
+
+###4. start_urls | Value: array of strings  
+An array of absolute urls for the spider to start crawling  
+The spider will start crawling from this list of urls  
+Example:
+	["https://www.facebook.com"]  
+	["http://quotes.toscrape.com", "https://www.wikipedia.org"]  
+	["https://docs.python.org/3/library/index.html"]  
+
