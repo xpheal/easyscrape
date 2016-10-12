@@ -102,7 +102,7 @@ Name of the directory to store the downloaded html pages
 ###7. save_file_regex | string  
 Regex to match the url and use it as the name of the html file  
 The first regex group that is matched with the url will be used  
-Filepath = working_directory/html_directory_name/matched_regex.html
+Filepath = working_directory/html_directory_name/matched_regex.html  
 Example:  
 ```
 url: "http://quotes.toscrape.com/tag/love/page/2"
@@ -120,7 +120,8 @@ If True, remove the url query string when the spider crawls, else, do nothing.
 
 ###9. deny_page_regex | array of strings  
 List of regex to filter of urls  
-If any of the regex matches the url, the page will not be downloaded or data will not be extracted from that page. But, the spider will still crawl through that page.  
+If any of the regex matches the url, the page will not be downloaded or data will not be extracted from that page.  
+But, the spider will still crawl through that page.  
 Example:  
 ```
 deny_page_regex = ["/news/", "/list/", "/[0-9]+/"]
@@ -130,9 +131,9 @@ http://www.example.com/ex1/123423/example
 ```
 
 ###10. allow_page_regex | array of strings  
-List of regex to match pages that will be downloaded or pages where data will be extract from  
+List of regex to match pages that will be downloaded or will have their data extracted
 Only if the regex matches the url, the page will be downloaded or data will be extracted.  
-Keep in my that deny_page_regex has higher priority  
+Keep in mind that (deny_page_regex) has higher priority  
 Example:
 ```
 allow_page_regex = ["/page/[0-9]+"]
@@ -154,6 +155,8 @@ If 0, no priority adjustment for depth, a depth first crawl
 If positive integer, will prioritize lower depth request, breadth first crawl  
 
 ###14. data_extract_path | array of (colName, xPathString)  
+An array of (colName, xPathString) object to specify data to be extracted  
+Only pages that are allowed by (allow_page_regex) and (deny_page_regex) will have their data extracted
 colName: Name of the column of in the csv file  
 xPathString: XPath to the data you want to extract, will written to its csv column
 Example:
