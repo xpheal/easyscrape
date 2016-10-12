@@ -131,7 +131,7 @@ http://www.example.com/ex1/123423/example
 ```
 
 ###10. allow_page_regex | array of strings  
-List of regex to match pages that will be downloaded or will have their data extracted
+List of regex to match pages that will be downloaded or will have their data extracted  
 Only if the regex matches the url, the page will be downloaded or data will be extracted.  
 Keep in mind that (deny_page_regex) has higher priority  
 Example:
@@ -156,7 +156,7 @@ If positive integer, will prioritize lower depth request, breadth first crawl
 
 ###14. data_extract_path | array of (colName, xPathString)  
 An array of (colName, xPathString) object to specify data to be extracted  
-Only pages that are allowed by (allow_page_regex) and (deny_page_regex) will have their data extracted
+Only pages that are allowed by (allow_page_regex) and (deny_page_regex) will have their data extracted  
 colName: Name of the column of in the csv file  
 xPathString: XPath to the data you want to extract, will written to its csv column
 Example:
