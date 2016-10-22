@@ -3,6 +3,7 @@ import json
 import re
 import scrapy
 import csv
+from easyscrape.easy_parser import easy_parser
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 
@@ -15,10 +16,6 @@ class easy_spider(CrawlSpider):
 	global url_hashMap
 	url_hashMap = dict()
 
-	# If true, remove url query string when crawling pages
-	global remove_url_query
-	remove_url_query = False
-
 	# Load spider settings
 	def load_settings(self, settings_obj):
 		self.save_html_to_directory = settings_obj["save_html_to_directory"]
@@ -28,7 +25,11 @@ class easy_spider(CrawlSpider):
 		self.csv_output_file = settings_obj["csv_output_file"]
 		self.html_directory_name = settings_obj["html_directory_name"]
 		self.save_file_regex = settings_obj["save_file_regex"]
-		self.remove_url_query = settings_obj["remove_url_query"]
+		
+		# If true, remove url query string when crawling pages		
+		global remove_url_query
+		remove_url_query = settings_obj["remove_url_query"]
+		
 		self.allow_page_regex = settings_obj["allow_page_regex"]
 		self.deny_page_regex = settings_obj["deny_page_regex"]
 		self.randomize_download_delay = settings_obj["randomize_download_delay"]
@@ -53,10 +54,13 @@ class easy_spider(CrawlSpider):
 			Rule(LinkExtractor(process_value=self.process_url), follow=True)
 		)
 
-		# Write top row of csv file
 		if self.save_data_to_csv:
-			with open(self.csv_output_file, 'w') as csv_out:
-				csv.writer(csv_out).writerow([i['colName'] for i in self.data_extract_path])
+			self.data_parser = easy_parser(self.data_extract_path, self.csv_output_file)
+
+		# Write top row of csv file
+		# if self.save_data_to_csv:
+		# 	with open(self.csv_output_file, 'w') as csv_out:
+		# 		csv.writer(csv_out).writerow([i['colName'] for i in self.data_extract_path])
 
 	# Write content to filename, create directory if it doesn't exist
 	def write_html_file(self, filename, content):
@@ -84,7 +88,7 @@ class easy_spider(CrawlSpider):
 			page_id = re.search(self.save_file_regex, response.url)
 
 			try:
-				filename = self.html_directory_name + '/%s.html' % page_id.group(1)
+				filename = self.html_directory_name + '/%s.html' % page_id.group(1).rstrip('/')
 				self.write_html_file(filename, response.body)
 			except AttributeError as ex:
 				print("URL: " + response.url)
@@ -93,8 +97,9 @@ class easy_spider(CrawlSpider):
 
 		# Save the data to csv file
 		if self.save_data_to_csv:
-			with open(self.csv_output_file, 'a') as csv_out:
-				csv.writer(csv_out).writerow(",".join(response.xpath(i["xPathString"]).extract()) for i in self.data_extract_path)
+			self.data_parser.extract_data_to_csv(response.body.decode('utf-8'))
+			# with open(self.csv_output_file, 'a') as csv_out:
+			# 	csv.writer(csv_out).writerow(",".join(response.xpath(i["xPathString"]).extract()) for i in self.data_extract_path)
 
 	# Parse the url to be followed, remove query string and disallow repetition
 	def process_url(url):

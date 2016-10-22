@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name = 'easyscrape',
-	version = '0.17',
+	version = '0.22',
 	packages = find_packages(),
 	install_requires=[
 		'scrapy',
