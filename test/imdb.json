@@ -1,5 +1,5 @@
 {
-    "save_html_to_directory": true,
+    "save_html_to_directory": false,
     "save_data_to_csv": true,
     "allowed_domains": ["www.imdb.com"],
     "start_urls": ["http://www.imdb.com/"],

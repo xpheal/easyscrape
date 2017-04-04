@@ -1,5 +1,6 @@
 import re
 import json
+import sys
 
 # Return default settings for spider
 def get_default_settings_obj():

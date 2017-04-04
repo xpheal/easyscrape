@@ -7,11 +7,12 @@ from os import listdir
 
 class easy_parser():
 	def __init__(self, data_extract_path, csv_file):
+		self.csv_file = open(csv_file, 'w')
+
 		self.settings_func = []
 		for i in data_extract_path:
 			self.settings_func.append(etree.XPath(i['xPathString']))
 
-		self.csv_file = open(csv_file, 'w')
 		self.csv_writer = csv.writer(self.csv_file)
 
 		self.csv_writer.writerow([i['colName'] for i in data_extract_path])

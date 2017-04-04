@@ -11,12 +11,12 @@ easyscrape download (url)
 Function: Download the whole domain of the given url  
 url: The absolute url of the domain
 
-##2) scrape
+##2) scrapefile
 ```
-easyscrape scrape (url) (data_extract_path)
+easyscrape scrapefile (file) (data_extract_path)
 ```
-Function: Crawl the given url and extract data to csv  
-url: The absolute url of the domain  
+Function: Crawl the given file and extract data to csv  
+file: Name of the file, most likely to be a html file  
 data_extract_path: JSON file that contains an array of (colName, xPathString)  
 
 ###data_extract_path object format:
@@ -34,12 +34,20 @@ data_extract_path: JSON file that contains an array of (colName, xPathString)
 ```
 Basically, it will crawl the url given and extract any data that match the given xpath into the csv column  
 
-##3) run
+##3) scrapedirectory
+```
+easyscrape scrapedirectory (directory) (data_extract_path)
+```
+Function: Crawl all the files in the directory and extract data to csv  
+directory: Name of the directory  
+data_extract_path: JSON file that contains an array of (colName, xPathString)  
+
+##4) run
 ```
 easyscrape run (settings)
 ```
 Function: Run the given settings file, default settings is used if setting is not given  
-\*Scroll to the bottom for settings file example.
+Some examples of settings file: [imdb.json](https://github.com/xpheal/easyscrape/blob/master/test/imdb.json) [rotten.json](https://github.com/xpheal/easyscrape/blob/master/test/rotten.json) [cars.json](https://github.com/xpheal/easyscrape/blob/master/test/cars.json)  
 
 ###Default settings:
 ```json

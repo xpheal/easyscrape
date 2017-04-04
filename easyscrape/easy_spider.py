@@ -13,8 +13,10 @@ class easy_spider(CrawlSpider):
 
 	# Customize functions
 	# Hashmap to make sure there's no repetition when parsing url to follow
-	global url_hashMap
-	url_hashMap = dict()
+	global url_hashMap1 # For Rule 1
+	global url_hashMap2 # For Rule 2
+	url_hashMap1 = dict()
+	url_hashMap2 = dict()
 
 	# Load spider settings
 	def load_settings(self, settings_obj):
@@ -50,17 +52,12 @@ class easy_spider(CrawlSpider):
 
 		# Rules to follow, crawl all pages, repeated pages are process at process_url, callback parse_items if match movie page
 		self.rules = (
-			Rule(LinkExtractor(process_value=self.process_url, allow=(self.allow_page_regex), deny=(self.deny_page_regex)), callback='parse_items', follow=True),
-			Rule(LinkExtractor(process_value=self.process_url), follow=True)
+			Rule(LinkExtractor(process_value=self.process_url1, allow=(self.allow_page_regex), deny=(self.deny_page_regex)), callback='parse_items', follow=True),
+			Rule(LinkExtractor(process_value=self.process_url2), follow=True)
 		)
 
 		if self.save_data_to_csv:
 			self.data_parser = easy_parser(self.data_extract_path, self.csv_output_file)
-
-		# Write top row of csv file
-		# if self.save_data_to_csv:
-		# 	with open(self.csv_output_file, 'w') as csv_out:
-		# 		csv.writer(csv_out).writerow([i['colName'] for i in self.data_extract_path])
 
 	# Write content to filename, create directory if it doesn't exist
 	def write_html_file(self, filename, content):
@@ -98,11 +95,9 @@ class easy_spider(CrawlSpider):
 		# Save the data to csv file
 		if self.save_data_to_csv:
 			self.data_parser.extract_data_to_csv(response.body.decode('utf-8'))
-			# with open(self.csv_output_file, 'a') as csv_out:
-			# 	csv.writer(csv_out).writerow(",".join(response.xpath(i["xPathString"]).extract()) for i in self.data_extract_path)
 
-	# Parse the url to be followed, remove query string and disallow repetition
-	def process_url(url):
+	# Parse the url to be followed, remove query string and disallow repetition (For Rule 1)
+	def process_url1(url):
 		'''
 		Process the url before the spider starts to crawl that page
 		Remove the query string and check for repetition
@@ -111,20 +106,50 @@ class easy_spider(CrawlSpider):
 		if not remove_url_query:
 			return url
 
-		result = re.match('(http:\/\/.*)\?', url)
+		url = re.sub('^https', 'http', url)
+		result = re.match('(.*)\?', url)
 
 		# Make sure that there's no repetition using a dictionary
 		if result:
 			result_url = result.group(1).strip("/")
 
-			if result_url not in url_hashMap:
-				url_hashMap[result_url] = None
+			if result_url not in url_hashMap1:
+				url_hashMap1[result_url] = None
 				return result_url
 			else:
 				return None
 		else:
-			if url not in url_hashMap:
-				url_hashMap[url] = None
+			if url not in url_hashMap1:
+				url_hashMap1[url] = None
 				return url
 			else:
 				return None
+
+	# Parse the url to be followed, remove query string and disallow repetition (For Rule 2)
+	def process_url2(url):
+		'''
+		Process the url before the spider starts to crawl that page
+		Remove the query string and check for repetition
+		If that page has not been crawled before, store in dictionary and return url, else return None
+		'''
+		if not remove_url_query:
+			return url
+
+		url = re.sub('^https', 'http', url)
+		result = re.match('(.*)\?', url)
+
+		# Make sure that there's no repetition using a dictionary
+		if result:
+			result_url = result.group(1).strip("/")
+
+			if result_url not in url_hashMap2:
+				url_hashMap2[result_url] = None
+				return result_url
+			else:
+				return None
+		else:
+			if url not in url_hashMap2:
+				url_hashMap2[url] = None
+				return url
+			else:
+				return None	

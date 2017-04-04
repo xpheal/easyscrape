@@ -4,10 +4,10 @@ import re
 import sys
 import argparse
 import scrapy
-import easyscrape.easy_settings as easy_settings
 from scrapy.crawler import CrawlerProcess
 from easyscrape.easy_spider import easy_spider
 from easyscrape.easy_parser import easy_parser
+import easyscrape.easy_settings as easy_settings
 
 def start_crawler(settings_obj):
 	process = CrawlerProcess({
@@ -49,13 +49,13 @@ def main():
 	subparsers = parser.add_subparsers(title='command', dest='cmd', description='Command for easyscrape, choose from download, run, scrapefile or scrapedirectory')
 	subparsers.required = True
 
-	download_parser = subparsers.add_parser('download', help='Download all the html files and save it in a directory')
-	download_parser.add_argument('url', help='Start crawling from this url')
-	download_parser.set_defaults(func=download)
-
 	run_parser = subparsers.add_parser('run', help='Run the scraper using the settings file')
 	run_parser.add_argument('settings', help='Settings to be loaded')
 	run_parser.set_defaults(func=run)
+
+	download_parser = subparsers.add_parser('download', help='Download all the html files and save it in a directory')
+	download_parser.add_argument('url', help='Start crawling from this url')
+	download_parser.set_defaults(func=download)
 
 	scrape_parser = subparsers.add_parser('scrapefile', help='Scrape data from a html file to a csv file')
 	scrape_parser.add_argument('file', help='Scrape data from this html file')
