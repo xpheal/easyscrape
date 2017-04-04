@@ -1,7 +1,7 @@
 #Documentation
 
 ```
-easyscrape {download, run, scrape}
+easyscrape {download, run, scrapefile, scrapedirectory}
 ```
 
 ##1) download
