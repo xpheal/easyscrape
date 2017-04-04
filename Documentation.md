@@ -1,17 +1,17 @@
-#Documentation
+# Documentation
 
 ```
 easyscrape {download, run, scrapefile, scrapedirectory}
 ```
 
-##1) download
+## 1) download
 ```
 easyscrape download (url)
 ```
 Function: Download the whole domain of the given url  
 url: The absolute url of the domain
 
-##2) scrapefile
+## 2) scrapefile
 ```
 easyscrape scrapefile (file) (data_extract_path)
 ```
@@ -19,7 +19,7 @@ Function: Crawl the given file and extract data to csv
 file: Name of the file, most likely to be a html file  
 data_extract_path: JSON file that contains an array of (colName, xPathString)  
 
-###data_extract_path object format:
+### data_extract_path object format:
 ```json
 [
 	{
@@ -34,7 +34,7 @@ data_extract_path: JSON file that contains an array of (colName, xPathString)
 ```
 Basically, it will crawl the url given and extract any data that match the given xpath into the csv column  
 
-##3) scrapedirectory
+## 3) scrapedirectory
 ```
 easyscrape scrapedirectory (directory) (data_extract_path)
 ```
@@ -42,14 +42,14 @@ Function: Crawl all the files in the directory and extract data to csv
 directory: Name of the directory  
 data_extract_path: JSON file that contains an array of (colName, xPathString)  
 
-##4) run
+## 4) run
 ```
 easyscrape run (settings)
 ```
 Function: Run the given settings file, default settings is used if setting is not given  
 Some examples of settings file: [imdb.json](https://github.com/xpheal/easyscrape/blob/master/test/imdb.json) [rotten.json](https://github.com/xpheal/easyscrape/blob/master/test/rotten.json) [cars.json](https://github.com/xpheal/easyscrape/blob/master/test/cars.json)  
 
-###Default settings:
+### Default settings:
 ```json
 {	
 	"save_html_to_directory": false,
@@ -69,19 +69,19 @@ Some examples of settings file: [imdb.json](https://github.com/xpheal/easyscrape
 }
 ```
 
-###1. save_html_to_directory | Value: boolean  
+### 1. save_html_to_directory | Value: boolean  
 If True, download pages into the directory, If False, do nothing.  
 Name of directory: (html_directory_name)  
 Pages allowed: (allow_page_regex) - (deny_page_regex)  
 Page naming: (save_file_regex)  
 
-###2. save_data_to_csv | Value: boolean  
+### 2. save_data_to_csv | Value: boolean  
 If True, extract data from pages that match the XPath and save them in CSV, If False, do nothing.  
 Name of CSV output file: (csv_output_file)  
 Pages allowed: (allow_page_regex) - (deny_page_regex)  
 XPath to match: (data_extract_path)  
 
-###3. allowed_domains | Value: array of strings  
+### 3. allowed_domains | Value: array of strings  
 An array of domains that the spider is allowed to crawl  
 The spider will not visit domains that are not listed in (allowed_domains)  
 Examples:  
@@ -91,7 +91,7 @@ Examples:
 ["quotes.toscrape.com", "www.google.com", "www.facebook.com"]  
 ```
 
-###4. start_urls | Value: array of strings  
+### 4. start_urls | Value: array of strings  
 An array of absolute urls for the spider to start crawling  
 The spider will start crawling from this list of urls  
 Examples:
@@ -101,13 +101,13 @@ Examples:
 ["https://docs.python.org/3/library/index.html"]  
 ```
 
-###5. csv_output_file | string  
+### 5. csv_output_file | string  
 Name of the csv output file to store the extracted data  
 
-###6. html_directory_name | string  
+### 6. html_directory_name | string  
 Name of the directory to store the downloaded html pages  
 
-###7. save_file_regex | string  
+### 7. save_file_regex | string  
 Regex to match the url and use it as the name of the html file  
 The first regex group that is matched with the url will be used  
 Filepath = working_directory/html_directory_name/matched_regex.html  
@@ -123,10 +123,10 @@ filename: "love/page/2.html"
 full file path: working_directory/html_directory_name/love/page/2.html
 ```
 
-###8. remove_url_query | boolean  
+### 8. remove_url_query | boolean  
 If True, remove the url query string when the spider crawls, else, do nothing.  
 
-###9. deny_page_regex | array of strings  
+### 9. deny_page_regex | array of strings  
 List of regex to filter of urls  
 If any of the regex matches the url, the page will not be downloaded or data will not be extracted from that page.  
 But, the spider will still crawl through that page.  
@@ -138,7 +138,7 @@ http://www.example.com/news/
 http://www.example.com/ex1/123423/example
 ```
 
-###10. allow_page_regex | array of strings  
+### 10. allow_page_regex | array of strings  
 List of regex to match pages that will be downloaded or will have their data extracted  
 Only if the regex matches the url, the page will be downloaded or data will be extracted.  
 Keep in mind that (deny_page_regex) has higher priority  
@@ -149,20 +149,20 @@ Example pages that will be allowed:
 http://www.example.com/page/12312
 ```
 
-###11. randomize_download_delay | 0 or 1
+### 11. randomize_download_delay | 0 or 1
 If 0, the download delay is not randomized, if 1, the download delay is randomized  
 Cause the spider crawling speed to be random, prevent getting blocked for crawling    
 
-###12. download_delay | seconds
+### 12. download_delay | seconds
 Control the crawling speed of the spider, the amount of time it takes for the spider to crawl the next url  
 To decrease the chances of getting block by certain websites  
 If set to 0, there will be no delay
 
-###13. depth_priority | integer
+### 13. depth_priority | integer
 If 0, no priority adjustment for depth, a depth first crawl  
 If positive integer, will prioritize lower depth request, breadth first crawl  
 
-###14. data_extract_path | array of (colName, xPathString)  
+### 14. data_extract_path | array of (colName, xPathString)  
 An array of (colName, xPathString) object to specify data to be extracted  
 Only pages that are allowed by (allow_page_regex) and (deny_page_regex) will have their data extracted  
 colName: Name of the column of in the csv file  
