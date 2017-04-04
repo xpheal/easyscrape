@@ -24,4 +24,7 @@ sudo pip3 install easyscrape --upgrade
 
 # Documentation
 
-Link: [Documentation.md](https://github.com/xpheal/easyscrape/blob/master/Documentation.md)
+Link: [Documentation.md](https://github.com/xpheal/easyscrape/blob/master/Documentation.md)  
+
+#### Some examples of settings file: [imdb.json](https://github.com/xpheal/easyscrape/blob/master/test/imdb.json) | [rotten.json](https://github.com/xpheal/easyscrape/blob/master/test/rotten.json) | [cars.json](https://github.com/xpheal/easyscrape/blob/master/test/cars.json)  
+#### Some examples of results in CSV: [IMDB_scrape_data.csv](https://github.com/xpheal/easyscrape/blob/master/test/IMDB_scrape_data.csv) | [Rotten_scrape_data.csv](https://github.com/xpheal/easyscrape/blob/master/test/Rotten_scrape_data.csv) | [cars.csv](https://github.com/xpheal/easyscrape/blob/master/test/cars.csv)
