@@ -47,7 +47,9 @@ data_extract_path: JSON file that contains an array of (colName, xPathString)
 easyscrape run (settings)
 ```
 Function: Run the given settings file, default settings is used if setting is not given  
-Some examples of settings file: [imdb.json](https://github.com/xpheal/easyscrape/blob/master/test/imdb.json) [rotten.json](https://github.com/xpheal/easyscrape/blob/master/test/rotten.json) [cars.json](https://github.com/xpheal/easyscrape/blob/master/test/cars.json)  
+
+#### Some examples of settings file: [imdb.json](https://github.com/xpheal/easyscrape/blob/master/test/imdb.json) | [rotten.json](https://github.com/xpheal/easyscrape/blob/master/test/rotten.json) | [cars.json](https://github.com/xpheal/easyscrape/blob/master/test/cars.json)  
+#### Some examples of results in CSV: [IMDB_scrape_data.csv](https://github.com/xpheal/easyscrape/blob/master/test/IMDB_scrape_data.csv) | [Rotten_scrape_data.csv](https://github.com/xpheal/easyscrape/blob/master/test/Rotten_scrape_data.csv) | [cars.csv](https://github.com/xpheal/easyscrape/blob/master/test/cars.csv)
 
 ### Default settings:
 ```json
